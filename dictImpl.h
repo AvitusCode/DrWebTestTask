@@ -1,8 +1,6 @@
 #pragma once
 #include "dictInterface.h"
 #include <map>
-#include <string>
-#include <vector>
 
 template<typename Key, typename Value>
 class dictionaryImpl : public dictionary<Key, Value>
