@@ -12,27 +12,22 @@ public:
 	
 	const Value& get(const Key &key) const override
 	{
-		if (this->is_set(key)){
-			return dict.at(key);
-		} 
-		else{
+		auto result = dict.find(key);
+		
+		if (result == dict.end()){
 			throw KeyException(key);
 		}
+		
+		return result->second;
 	}
 	void set(const Key &key, const Value &value) override
 	{
-		if (!this->is_set(key)){
-			dict[key] = value;
-		} 
-		else{
-			throw KeyException(key);
-		}
+		dict[key] = value;
 	}
 	bool is_set(const Key &key) const override{
 		return dict.count(key) > 0;
 	}
 	
-	//We don't know anything about the data that the dictionary can accept. Therefore, there will be a default destructor
 	~dictionaryImpl() = default;
 	
 class KeyException : public not_found_exception<Key>
